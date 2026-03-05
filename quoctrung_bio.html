@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quốc Trung | Trang Cá Nhân</title>
+<meta name="description" content="Trang cá nhân của Quốc Trung - Instagram, Facebook, TikTok">
+<meta name="author" content="Quốc Trung">
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/616/616408.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, Helvetica, sans-serif;}
+body{height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden;color:white;}
+.bg{position:fixed;top:-10%;left:-10%;width:120%;height:120%;background:url("https://images.pexels.com/photos/28891882/pexels-photo-28891882.jpeg") center/cover no-repeat;animation:bgmove 20s ease-in-out infinite alternate;z-index:-2;}
+@keyframes bgmove{0%{transform:scale(1) translate(0,0);}50%{transform:scale(1.12) translate(-3%,2%);}100%{transform:scale(1.18) translate(3%,-2%);}}
+canvas{position:fixed;top:0;left:0;z-index:-1;}
+.container{text-align:center;padding:40px;border-radius:30px;background:rgba(255,255,255,0.15);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.3);box-shadow:0 20px 60px rgba(0,0,0,0.6),inset 0 1px 1px rgba(255,255,255,0.4);animation:fade 1.2s ease;}
+@keyframes fade{from{opacity:0; transform:translateY(30px);}to{opacity:1; transform:translateY(0);}}
+.avatar{width:130px;height:130px;margin:auto;margin-bottom:18px;border-radius:50%;background:url("https://wallpaperaccess.com/download/maybach-logo-6044365") center/cover;box-shadow:0 0 20px rgba(255,255,255,0.7),0 0 40px rgba(255,255,255,0.4);}
+h1{margin-bottom:5px;font-size:32px;text-shadow:0 0 10px #fff,0 0 20px #00eaff,0 0 40px #00eaff;}
+.welcome{font-size:14px;opacity:0.85;margin-bottom:20px;}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:260px;margin:12px auto;padding:14px;border-radius:20px;text-decoration:none;font-size:18px;color:white;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);backdrop-filter:blur(16px);box-shadow:0 8px 25px rgba(0,0,0,0.5),inset 0 1px 1px rgba(255,255,255,0.5);position:relative;overflow:hidden;transition:0.25s;}
+.btn:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(255,255,255,0.5),0 10px 30px rgba(0,0,0,0.6);}
+.btn:active{transform:scale(0.94);}
+.dark .btn{background:rgba(0,0,0,0.55);}
+.dark .container{background:rgba(0,0,0,0.45);}
+.switch-wrapper{display:flex;justify-content:center;margin-top:18px;}
+.switch{position:relative;width:60px;height:30px;}
+.switch input{display:none;}
+.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:rgba(255,255,255,0.25);border-radius:30px;backdrop-filter:blur(10px);transition:0.4s;}
+.slider:before{position:absolute;content:"";height:24px;width:24px;left:3px;top:3px;background:white;border-radius:50%;transition:0.4s;box-shadow:0 0 10px rgba(255,255,255,0.9);}
+input:checked + .slider{background:#0a84ff;box-shadow:0 0 15px #0a84ff;}
+input:checked + .slider:before{transform:translateX(30px);}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<canvas id="particles"></canvas>
+<div class="container">
+<div class="avatar"></div>
+<h1>Quốc Trung</h1>
+<div class="welcome">Chào mừng đến với trang cá nhân của Trung</div>
+<a class="btn" href="https://www.instagram.com/nqtun._.08" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
+<a class="btn" href="https://www.facebook.com/share/1CagAX7a4H/" target="_blank"><i class="fab fa-facebook"></i>Facebook</a>
+<a class="btn" href="https://www.tiktok.com/@nquoctrung._08" target="_blank"><i class="fab fa-tiktok"></i>TikTok</a>
+<div class="switch-wrapper">
+<label class="switch">
+<input type="checkbox" onclick="toggleMode()">
+<span class="slider"></span>
+</label>
+</div>
+</div>
+<script>
+function toggleMode(){document.body.classList.toggle("dark");}
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener("resize",resize);
+let particles=[];
+for(let i=0;i<150;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*3+1,speedX:(Math.random()-0.5)*0.8,speedY:(Math.random()-0.5)*0.8,color:`hsl(${Math.random()*360},100%,70%)`});}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.x+=p.speedX;p.y+=p.speedY;if(p.x<0||p.x>canvas.width)p.speedX*=-1;if(p.y<0||p.y>canvas.height)p.speedY*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=p.color;ctx.fill();});requestAnimationFrame(animate);}
+animate();
+</script>
+</body>
+</html>
